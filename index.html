@@ -29,11 +29,11 @@
   /* the "+" on every changeable thing */
   #markers { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
   .plus { position: absolute; left: -30px; top: -30px; width: 60px; height: 60px; border-radius: 50%; border: 4px solid #fff; background: var(--accent); color: #fff; font: 800 40px/1 system-ui, sans-serif; padding: 0 0 4px; pointer-events: auto; box-shadow: 0 4px 14px rgba(0,0,0,.3); }
-  .plus::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 4px solid var(--accent); animation: ring 1.6s ease-out infinite; }
   .plus[hidden] { display: none; }
-  @keyframes ring { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(1.7); opacity: 0; } }
-  .plus { animation: breathe 1.6s ease-in-out infinite; }
-  @keyframes breathe { 0%, 100% { scale: 1; } 50% { scale: 1.1; } }
+  /* shown on entering a view, then faded away; tapping the thing itself still opens it */
+  .plus { animation: breathe 1.4s ease-in-out infinite; transition: opacity .6s ease; }
+  .plus.gone { opacity: 0; pointer-events: none; }
+  @keyframes breathe { 0%, 100% { scale: .92; } 50% { scale: 1.08; } }
 
   /* bottom: room buttons (whole hotel) and the coach line */
   .sheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 2; padding: 14px 12px calc(12px + env(safe-area-inset-bottom)); background: linear-gradient(transparent, rgba(243,233,220,.97) 22px); display: flex; flex-direction: column; gap: 10px; }
@@ -100,7 +100,7 @@
   .celebrate b { display: block; font-size: 28px; }
   .celebrate span { display: block; font-size: 20px; font-weight: 700; opacity: .9; margin-top: 2px; }
   @keyframes pop { 0% { opacity: 0; transform: translate(-50%, -50%) scale(.5); } 12% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 85% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -60%) scale(.95); } }
-  @media (prefers-reduced-motion: reduce) { .celebrate, .toast, .bubble { animation-duration: .01s; animation-iteration-count: 1; } .celebrate { animation: none; } .plus, .plus::after, .pill.bump { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .celebrate, .toast, .bubble { animation-duration: .01s; animation-iteration-count: 1; } .celebrate { animation: none; } .plus, .pill.bump { animation: none; } }
 </style>
   
 </head>
@@ -124,7 +124,7 @@
 // (#k=…) or, when the game is reopened without the link, from the game's saved
 // state on this phone. Without the token the bundle can't be read, so the
 // webhook key and the claim-code hashes inside it stay private.
-const ITER = 100000, BIN = "site-b52794c6.bin", MSG = {"en":{"title":"Scan the QR code at Tech Day to play","body":"The game opens from the QR code on the screen at the start of Tech Day."},"sv":{"title":"Skanna QR-koden på Tech Day för att spela","body":"Spelet öppnas från QR-koden på skärmen i början av Tech Day."},"no":{"title":"Skann QR-koden på Tech Day for å spille","body":"Spillet åpnes fra QR-koden på skjermen i starten av Tech Day."},"da":{"title":"Scan QR-koden på Tech Day for at spille","body":"Spillet åbnes fra QR-koden på skærmen i starten af Tech Day."}};
+const ITER = 100000, BIN = "site-26929716.bin", MSG = {"en":{"title":"Scan the QR code at Tech Day to play","body":"The game opens from the QR code on the screen at the start of Tech Day."},"sv":{"title":"Skanna QR-koden på Tech Day för att spela","body":"Spelet öppnas från QR-koden på skärmen i början av Tech Day."},"no":{"title":"Skann QR-koden på Tech Day for å spille","body":"Spillet åpnes fra QR-koden på skjermen i starten av Tech Day."},"da":{"title":"Scan QR-koden på Tech Day for at spille","body":"Spillet åbnes fra QR-koden på skærmen i starten af Tech Day."}};
 
 function savedState() {
   try { return JSON.parse(localStorage.getItem('techday-hotel-v1') || '{}'); } catch { return {}; }
