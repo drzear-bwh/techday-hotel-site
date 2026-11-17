@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tech Day Hotel</title>
-<link rel="icon" href="./assets/worldhotels-window-DdCuk9G3.svg" type="image/svg+xml">
+<link rel="icon" href="./assets/worldhotels-window-BoEwWbQL.svg" type="image/svg+xml">
 <style>
-  :root { --bg: #f3e9dc; --ink: #111111; --card: #ffffff; --accent: #EA5B48; --accent-dark: #c9412f; --ok: #2f7d55; } /* WorldHotels: coral, white, black */
+  :root { --bg: #f3e9dc; --ink: #111111; --card: #ffffff; --accent: #fd4d3d; --accent-dark: #d63a2b; --ok: #2f7d55; } /* WorldHotels: coral (#FD4D3D, accent1 in the WorldHotels PPT template), white, black */
   html, body { margin: 0; height: 100%; background: var(--bg); font: 18px/1.4 system-ui, -apple-system, sans-serif; color: var(--ink); overscroll-behavior: none; -webkit-user-select: none; user-select: none; }
   button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
   #app { position: fixed; inset: 0; }
@@ -17,7 +17,7 @@
   .hud > * { pointer-events: auto; }
   .btn { min-height: 52px; min-width: 52px; border: 0; border-radius: 999px; background: var(--card); font-weight: 800; font-size: 19px; padding: 0 18px; box-shadow: 0 2px 8px rgba(0,0,0,.16); }
   #menu { padding: 0; font-size: 24px; flex: none; }
-  .pill { display: flex; align-items: baseline; gap: 6px; min-height: 52px; box-sizing: border-box; padding: 9px 18px; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 700; font-size: 17px; box-shadow: 0 4px 14px rgba(234,91,72,.4); white-space: nowrap; flex: none; }
+  .pill { display: flex; align-items: baseline; gap: 6px; min-height: 52px; box-sizing: border-box; padding: 9px 18px; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 700; font-size: 17px; box-shadow: 0 4px 14px rgba(253,77,61,.4); white-space: nowrap; flex: none; }
   .pill b { font-size: 28px; line-height: 1; }
   .pill.bump { animation: bump .6s cubic-bezier(.2,1.6,.4,1); }
   @keyframes bump { 0% { transform: scale(1); } 30% { transform: scale(1.25); } 100% { transform: scale(1); } }
@@ -52,7 +52,7 @@
   .modal p { margin: 0 0 14px; opacity: .85; }
   .modal .first { font-weight: 700; opacity: 1; font-size: 20px; }
   .modal .warn { color: #b3361f; opacity: 1; font-weight: 600; }
-  .modal .primary { display: block; width: 100%; min-height: 56px; border: 0; border-radius: 999px; padding: 14px 20px; background: var(--accent); color: #fff; font: 800 20px system-ui, sans-serif; box-shadow: 0 4px 14px rgba(234,91,72,.35); margin-top: 8px; }
+  .modal .primary { display: block; width: 100%; min-height: 56px; border: 0; border-radius: 999px; padding: 14px 20px; background: var(--accent); color: #fff; font: 800 20px system-ui, sans-serif; box-shadow: 0 4px 14px rgba(253,77,61,.35); margin-top: 8px; }
   .modal .primary:disabled { opacity: .5; }
   .modal .link { display: block; width: 100%; min-height: 48px; border: 0; background: none; padding: 12px; font-weight: 600; text-decoration: underline; }
   .modal .row { display: block; width: 100%; min-height: 56px; border: 0; border-bottom: 1px solid #eee; background: none; padding: 14px 4px; font-weight: 700; font-size: 19px; text-align: left; }
@@ -80,7 +80,7 @@
   .item .txt { display: flex; flex-direction: column; gap: 4px; }
   .item .txt b { font-size: 20px; line-height: 1.2; }
   .item .txt span { font-size: 16px; line-height: 1.35; opacity: .8; }
-  .item .buy { grid-column: 1 / -1; min-height: 56px; border: 0; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 800; font-size: 20px; box-shadow: 0 3px 10px rgba(234,91,72,.3); }
+  .item .buy { grid-column: 1 / -1; min-height: 56px; border: 0; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 800; font-size: 20px; box-shadow: 0 3px 10px rgba(253,77,61,.3); }
   .item .buy.free { background: var(--ink); box-shadow: none; }
   .item .buy:disabled { background: #d9d2c8; color: #6b625a; box-shadow: none; }
   .item.chosen .buy:disabled { background: var(--ok); color: #fff; }
@@ -91,7 +91,7 @@
   @keyframes float { 0% { opacity: 0; transform: translate(-50%, -80%) scale(.7); } 12% { opacity: 1; transform: translate(-50%, -110%) scale(1); } 75% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, -190%); } }
   .toast { position: fixed; z-index: 6; left: 50%; top: calc(84px + env(safe-area-inset-top)); transform: translateX(-50%); background: var(--ink); color: #fff; padding: 12px 18px; border-radius: 18px; font-weight: 700; box-shadow: 0 4px 14px rgba(0,0,0,.2); animation: toast 2.6s ease forwards; width: max-content; max-width: 88vw; text-align: center; }
   @keyframes toast { 0% { opacity: 0; transform: translate(-50%, -10px); } 10%, 85% { opacity: 1; transform: translate(-50%, 0); } 100% { opacity: 0; } }
-  .celebrate { position: fixed; z-index: 6; left: 50%; top: 32%; transform: translate(-50%, -50%); background: var(--accent); color: #fff; padding: 20px 28px; border-radius: 24px; text-align: center; box-shadow: 0 10px 40px rgba(234,91,72,.45); animation: pop 2.6s cubic-bezier(.2,1.4,.4,1) forwards; pointer-events: none; width: max-content; max-width: 86vw; }
+  .celebrate { position: fixed; z-index: 6; left: 50%; top: 32%; transform: translate(-50%, -50%); background: var(--accent); color: #fff; padding: 20px 28px; border-radius: 24px; text-align: center; box-shadow: 0 10px 40px rgba(253,77,61,.45); animation: pop 2.6s cubic-bezier(.2,1.4,.4,1) forwards; pointer-events: none; width: max-content; max-width: 86vw; }
   .celebrate b { display: block; font-size: 28px; }
   .celebrate span { display: block; font-size: 20px; font-weight: 700; opacity: .9; margin-top: 2px; }
   @keyframes pop { 0% { opacity: 0; transform: translate(-50%, -50%) scale(.5); } 12% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 85% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -60%) scale(.95); } }
@@ -116,7 +116,7 @@
 // (#k=…) or, when the game is reopened without the link, from the game's saved
 // state on this phone. Without the token the bundle can't be read, so the
 // webhook key and the claim-code hashes inside it stay private.
-const ITER = 100000, BIN = "site-6f1cb048.bin", MSG = {"en":{"title":"Scan the QR code at Tech Day to play","body":"The game opens from the QR code on the screen at the start of Tech Day."},"sv":{"title":"Skanna QR-koden på Tech Day för att spela","body":"Spelet öppnas från QR-koden på skärmen i början av Tech Day."},"no":{"title":"Skann QR-koden på Tech Day for å spille","body":"Spillet åpnes fra QR-koden på skjermen i starten av Tech Day."},"da":{"title":"Scan QR-koden på Tech Day for at spille","body":"Spillet åbnes fra QR-koden på skærmen i starten af Tech Day."}};
+const ITER = 100000, BIN = "site-5e5f0413.bin", MSG = {"en":{"title":"Scan the QR code at Tech Day to play","body":"The game opens from the QR code on the screen at the start of Tech Day."},"sv":{"title":"Skanna QR-koden på Tech Day för att spela","body":"Spelet öppnas från QR-koden på skärmen i början av Tech Day."},"no":{"title":"Skann QR-koden på Tech Day for å spille","body":"Spillet åpnes fra QR-koden på skjermen i starten av Tech Day."},"da":{"title":"Scan QR-koden på Tech Day for at spille","body":"Spillet åbnes fra QR-koden på skærmen i starten af Tech Day."}};
 
 function savedState() {
   try { return JSON.parse(localStorage.getItem('techday-hotel-v1') || '{}'); } catch { return {}; }
