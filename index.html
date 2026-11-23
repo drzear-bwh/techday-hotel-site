@@ -79,6 +79,7 @@
   .modal h2 { margin: 4px 0 10px; font-size: 26px; line-height: 1.2; }
   .modal p { margin: 0 0 14px; opacity: .85; }
   .modal .first { font-weight: 700; opacity: 1; font-size: 20px; }
+  .modal .cardimg { display: block; width: auto; max-width: 100%; max-height: 50dvh; margin: 0 auto 12px; border-radius: 14px; box-shadow: 0 4px 16px rgba(0,0,0,.18); -webkit-touch-callout: default; }
   .modal .warn { color: #b3361f; opacity: 1; font-weight: 600; }
   .modal .primary { display: block; width: 100%; min-height: 56px; border: 0; border-radius: 999px; padding: 14px 20px; background: var(--accent); color: #fff; font: 800 20px system-ui, sans-serif; box-shadow: 0 4px 14px rgba(253,77,61,.35); margin-top: 8px; }
   .modal .primary:disabled { opacity: .5; }
@@ -156,7 +157,7 @@
 // (#k=…) or, when the game is reopened without the link, from the game's saved
 // state on this phone. Without the token the bundle can't be read, so the
 // webhook key and the claim-code hashes inside it stay private.
-const ITER = 100000, BIN = "site-916099d7.bin", MSG = {"en":{"title":"Scan the QR code at Tech Day to play","body":"The game opens from the QR code on the screen at the start of Tech Day."},"sv":{"title":"Skanna QR-koden på Tech Day för att spela","body":"Spelet öppnas från QR-koden på skärmen i början av Tech Day."},"no":{"title":"Skann QR-koden på Tech Day for å spille","body":"Spillet åpnes fra QR-koden på skjermen i starten av Tech Day."},"da":{"title":"Scan QR-koden på Tech Day for at spille","body":"Spillet åbnes fra QR-koden på skærmen i starten af Tech Day."}};
+const ITER = 100000, BIN = "site-e32aca1a.bin", MSG = {"en":{"title":"Scan the QR code at Tech Day to play","body":"The game opens from the QR code on the screen at the start of Tech Day."},"sv":{"title":"Skanna QR-koden på Tech Day för att spela","body":"Spelet öppnas från QR-koden på skärmen i början av Tech Day."},"no":{"title":"Skann QR-koden på Tech Day for å spille","body":"Spillet åpnes fra QR-koden på skjermen i starten av Tech Day."},"da":{"title":"Scan QR-koden på Tech Day for at spille","body":"Spillet åbnes fra QR-koden på skærmen i starten af Tech Day."}};
 
 function savedState() {
   try { return JSON.parse(localStorage.getItem('techday-hotel-v1') || '{}'); } catch { return {}; }
