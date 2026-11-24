@@ -159,7 +159,16 @@
   .celebrate b { display: block; font-size: 28px; }
   .celebrate span { display: block; font-size: 20px; font-weight: 700; opacity: .9; margin-top: 2px; }
   @keyframes pop { 0% { opacity: 0; transform: translate(-50%, -50%) scale(.5); } 12% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 85% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -60%) scale(.95); } }
-  @media (prefers-reduced-motion: reduce) { .celebrate, .toast, .bubble { animation-duration: .01s; animation-iteration-count: 1; } .celebrate { animation: none; } .pill.bump { animation: none; } }
+  /* the motion switch, under the top-left button; motion off (body.still): messages only fade */
+  .motion { position: fixed; z-index: 3; top: calc(72px + env(safe-area-inset-top)); left: 10px; display: flex; align-items: center; gap: 8px; min-height: 40px; box-sizing: border-box; padding: 6px 14px 6px 7px; border: 0; border-radius: 999px; background: rgba(255,255,255,.92); color: var(--ink); font: 700 15px/1 system-ui, sans-serif; cursor: pointer; }
+  .motion .sw { position: relative; width: 38px; height: 24px; border-radius: 12px; background: #b9b9b9; flex: none; }
+  .motion .sw::after { content: ''; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.3); }
+  .motion[aria-checked="true"] .sw { background: var(--ok); }
+  .motion[aria-checked="true"] .sw::after { left: 17px; }
+  @keyframes still-fade { 0% { opacity: 0; } 8%, 85% { opacity: 1; } 100% { opacity: 0; } }
+  body.still .toast, body.still .bubble, body.still .celebrate { animation-name: still-fade; }
+  body.still .pill.bump { animation: none; }
+  body.still *, body.still *::after { transition: none !important; }
 </style>
   
 </head>
@@ -170,6 +179,7 @@
   <h1 id="title"></h1>
   <span class="pill" id="points"></span>
 </div>
+<button id="motion" class="motion" role="switch" aria-checked="true"><span class="sw" aria-hidden="true"></span><span id="motion-label">Motion</span></button>
 <span class="status" id="status"></span>
 <div class="sheet" id="sheet"></div>
 <div class="modal" id="modal" hidden><div class="card" id="modalBody"></div></div>
@@ -180,7 +190,7 @@
 // (#k=…) or, when the game is reopened without the link, from the game's saved
 // state on this phone. Without the token the bundle can't be read, so the
 // webhook key and the claim-code hashes inside it stay private.
-const ITER = 100000, BIN = "site-8ceee8e4.bin", MSG = {"en":{"title":"Scan the QR code at Tech Day to play","body":"The game opens from the QR code on the screen at the start of Tech Day."},"sv":{"title":"Skanna QR-koden på Tech Day för att spela","body":"Spelet öppnas från QR-koden på skärmen i början av Tech Day."},"no":{"title":"Skann QR-koden på Tech Day for å spille","body":"Spillet åpnes fra QR-koden på skjermen i starten av Tech Day."},"da":{"title":"Scan QR-koden på Tech Day for at spille","body":"Spillet åbnes fra QR-koden på skærmen i starten af Tech Day."}};
+const ITER = 100000, BIN = "site-b2424688.bin", MSG = {"en":{"title":"Scan the QR code at Tech Day to play","body":"The game opens from the QR code on the screen at the start of Tech Day."},"sv":{"title":"Skanna QR-koden på Tech Day för att spela","body":"Spelet öppnas från QR-koden på skärmen i början av Tech Day."},"no":{"title":"Skann QR-koden på Tech Day for å spille","body":"Spillet åpnes fra QR-koden på skjermen i starten av Tech Day."},"da":{"title":"Scan QR-koden på Tech Day for at spille","body":"Spillet åbnes fra QR-koden på skærmen i starten af Tech Day."}};
 
 function savedState() {
   try { return JSON.parse(localStorage.getItem('techday-hotel-v1') || '{}'); } catch { return {}; }
