@@ -156,6 +156,17 @@
   .cards.grid .item .txt b { font-size: 17px; }
   .cards.grid .item .buy { min-height: 48px; font-size: 16px; padding: 0 6px; }
   .cards.grid .item small { font-size: 14px; }
+  /* the guided tour: the change panel takes the lower half, the room stays clear and touchable above it */
+  .modal.shop.tour { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; pointer-events: none; }
+  .modal.shop.tour .card { pointer-events: auto; height: 52dvh; max-height: 52dvh; padding-bottom: 0; box-shadow: 0 -6px 24px rgba(0,0,0,.16); }
+  .modal.tour .panel-head { padding-top: 14px; }
+  .modal .tourstep { margin: 0 2px 4px; font-weight: 800; font-size: 17px; opacity: 1; }
+  .modal .tournote { margin: 0 2px 6px; font-size: 15px; opacity: .75; }
+  .modal .tourmore { font-size: 17px; }
+  .tourbar { position: sticky; bottom: 0; display: flex; gap: 6px; align-items: center; background: var(--card); padding: 10px 0 calc(10px + env(safe-area-inset-bottom)); margin-top: 10px; }
+  .tourbar button { min-height: 44px; border: 0; border-radius: 999px; font: 700 15px system-ui, sans-serif; color: var(--ink); white-space: nowrap; }
+  .tourbar .tsmall { background: #f1ece5; padding: 0 10px; font-size: 14px; white-space: normal; line-height: 1.1; } /* wraps only on a narrower phone */
+  .tourbar .tnext { margin-left: auto; background: var(--ink); color: #fff; padding: 0 15px; font-size: 16px; font-weight: 800; }
   .item small { grid-column: 1 / -1; text-align: center; font-size: 16px; font-weight: 600; opacity: .75; }
 
   .bubble { position: fixed; z-index: 4; transform: translate(-50%, -100%); max-width: 70vw; background: var(--card); color: var(--ink); font: 700 17px/1.3 system-ui, sans-serif; padding: 10px 14px; border-radius: 16px; box-shadow: 0 4px 14px rgba(0,0,0,.18); pointer-events: none; text-align: center; animation: float 1.9s ease-out forwards; }
@@ -198,7 +209,7 @@
 // (#k=…) or, when the game is reopened without the link, from the game's saved
 // state on this phone. Without the token the bundle can't be read, so the
 // webhook key and the claim-code hashes inside it stay private.
-const ITER = 100000, BIN = "site-5237494b.bin", MSG = {"en":{"title":"Scan the QR code at Tech Day to play","body":"The game opens from the QR code on the screen at the start of Tech Day."},"sv":{"title":"Skanna QR-koden på Tech Day för att spela","body":"Spelet öppnas från QR-koden på skärmen i början av Tech Day."},"no":{"title":"Skann QR-koden på Tech Day for å spille","body":"Spillet åpnes fra QR-koden på skjermen i starten av Tech Day."},"da":{"title":"Scan QR-koden på Tech Day for at spille","body":"Spillet åbnes fra QR-koden på skærmen i starten af Tech Day."}};
+const ITER = 100000, BIN = "site-0d65eaa6.bin", MSG = {"en":{"title":"Scan the QR code at Tech Day to play","body":"The game opens from the QR code on the screen at the start of Tech Day."},"sv":{"title":"Skanna QR-koden på Tech Day för att spela","body":"Spelet öppnas från QR-koden på skärmen i början av Tech Day."},"no":{"title":"Skann QR-koden på Tech Day for å spille","body":"Spillet åpnes fra QR-koden på skjermen i starten av Tech Day."},"da":{"title":"Scan QR-koden på Tech Day for at spille","body":"Spillet åbnes fra QR-koden på skærmen i starten af Tech Day."}};
 
 function savedState() {
   try { return JSON.parse(localStorage.getItem('techday-hotel-v1') || '{}'); } catch { return {}; }
