@@ -79,6 +79,7 @@
   .locked b { font-size: 21px; }
   .locked p { margin: 6px 0 12px; font-size: 18px; }
   .scorerow { display: flex; gap: 8px; }
+  .locked .addscore { display: block; width: 100%; min-height: 48px; border: 2px solid var(--ink); border-radius: 999px; background: none; padding: 10px 16px; font: 700 17px system-ui, sans-serif; color: var(--ink); }
   .scorerow input { width: 96px; flex: none; font-size: 26px; font-weight: 800; text-align: center; border: 2px solid var(--ink); border-radius: 14px; }
   .scorerow button { flex: 1; }
   /* "Enter code", always next to the coach line */
@@ -195,7 +196,7 @@
 // (#k=…) or, when the game is reopened without the link, from the game's saved
 // state on this phone. Without the token the bundle can't be read, so the
 // webhook key and the claim-code hashes inside it stay private.
-const ITER = 100000, BIN = "site-befff55c.bin", MSG = {"en":{"title":"Scan the QR code at Tech Day to play","body":"The game opens from the QR code on the screen at the start of Tech Day."},"sv":{"title":"Skanna QR-koden på Tech Day för att spela","body":"Spelet öppnas från QR-koden på skärmen i början av Tech Day."},"no":{"title":"Skann QR-koden på Tech Day for å spille","body":"Spillet åpnes fra QR-koden på skjermen i starten av Tech Day."},"da":{"title":"Scan QR-koden på Tech Day for at spille","body":"Spillet åbnes fra QR-koden på skærmen i starten af Tech Day."}};
+const ITER = 100000, BIN = "site-801a7b29.bin", MSG = {"en":{"title":"Scan the QR code at Tech Day to play","body":"The game opens from the QR code on the screen at the start of Tech Day."},"sv":{"title":"Skanna QR-koden på Tech Day för att spela","body":"Spelet öppnas från QR-koden på skärmen i början av Tech Day."},"no":{"title":"Skann QR-koden på Tech Day for å spille","body":"Spillet åpnes fra QR-koden på skjermen i starten av Tech Day."},"da":{"title":"Scan QR-koden på Tech Day for at spille","body":"Spillet åbnes fra QR-koden på skærmen i starten af Tech Day."}};
 
 function savedState() {
   try { return JSON.parse(localStorage.getItem('techday-hotel-v1') || '{}'); } catch { return {}; }
