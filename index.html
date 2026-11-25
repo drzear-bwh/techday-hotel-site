@@ -132,7 +132,7 @@
   /* the change panel: a tall sheet of big cards */
   .modal.shop { padding: 0; place-items: end center; }
   .modal.shop .card { width: min(560px, 100%); max-height: 92dvh; border-radius: 26px 26px 0 0; padding: 0 14px calc(18px + env(safe-area-inset-bottom)); text-align: left; }
-  .panel-head { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; gap: 10px; background: var(--card); padding: 18px 2px 8px; }
+  .panel-head { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 10px; background: var(--card); padding: 18px 2px 8px; }
   .panel-head h2 { flex: 1; margin: 0; }
   .x { width: 52px; height: 52px; flex: none; border: 0; border-radius: 50%; background: #f1ece5; font-size: 24px; font-weight: 800; }
   .modal .have { margin: 0 2px 12px; font-weight: 700; font-size: 18px; opacity: 1; color: var(--accent-dark); }
@@ -149,9 +149,17 @@
   .item .buy.free { background: var(--ink); box-shadow: none; }
   .item .buy:disabled { background: #d9d2c8; color: #6b625a; box-shadow: none; }
   .item.chosen .buy:disabled { background: var(--ok); color: #fff; }
-  /* slots without descriptions (all but the PMS): small tiles, three a row; the whole tile is its button */
+  /* slots without descriptions (all but the PMS): two cards a row, picture on top */
+  .cards.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .cards.grid .item { grid-template-columns: 1fr; gap: 6px; padding: 8px; align-content: start; text-align: center; }
+  .cards.grid .item .pic { width: 100%; height: auto; aspect-ratio: 1; }
+  .cards.grid .item .txt b { font-size: 17px; }
+  .cards.grid .item .buy { min-height: 48px; font-size: 16px; padding: 0 6px; }
+  .cards.grid .item small { font-size: 14px; }
+  /* the same slots in the guided tour: small tiles; the whole tile is its button.
+     isolation keeps the price pill's z-index inside its tile, so it scrolls under the sticky title and bar */
   .cards.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
-  .cards.tiles .item { position: relative; grid-template-columns: 1fr; gap: 4px; padding: 6px 5px 7px; border-radius: 16px; align-content: start; text-align: center; }
+  .cards.tiles .item { position: relative; isolation: isolate; grid-template-columns: 1fr; gap: 4px; padding: 6px 5px 7px; border-radius: 16px; align-content: start; text-align: center; }
   .cards.tiles .item .pic { width: 100%; height: auto; aspect-ratio: 1; border-radius: 10px; }
   .cards.tiles .item .txt b { font-size: 15px; line-height: 1.15; hyphens: auto; overflow-wrap: anywhere; }
   .cards.tiles .item .buy { justify-self: center; min-height: 30px; min-width: 64px; font-size: 15px; padding: 0 10px; box-shadow: none; }
@@ -167,9 +175,9 @@
   .modal.tour .panel-head .x { width: 44px; height: 44px; font-size: 20px; }
   .modal .tourstep { margin: 0; font-weight: 800; font-size: 18px; line-height: 1.2; }
   .modal.tour .have { display: none; } /* the points stay in sight at the top of the screen */
-  /* in the tour: four smaller tiles a row, so a slot of 10 to 12 things fits in the panel with the room above */
-  .modal.tour .cards.tiles { grid-template-columns: repeat(4, 1fr); gap: 4px; }
-  .modal.tour .cards.tiles .item { gap: 2px; padding: 4px 3px; border-radius: 14px; }
+  /* in the tour: three tiles a row; a slot of 10 to 12 things scrolls a little, the room stays in sight above */
+  .modal.tour .cards.tiles { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .modal.tour .cards.tiles .item { gap: 3px; padding: 5px 4px 6px; border-radius: 14px; }
   /* the PMS (things with a line of text) in the tour: a smaller picture, the button beside the text */
   .modal.tour .cards:not(.tiles) { gap: 8px; }
   .modal.tour .cards:not(.tiles) .item { grid-template-columns: 72px 1fr; gap: 6px 10px; padding: 8px; }
@@ -178,14 +186,14 @@
   .modal.tour .cards:not(.tiles) .item .txt span { font-size: 14px; line-height: 1.3; }
   .modal.tour .cards:not(.tiles) .item .buy { grid-column: 2; min-height: 44px; font-size: 16px; }
   .modal.tour .cards:not(.tiles) .item small { grid-column: 2; }
-  .modal.tour .cards.tiles .item .pic { grid-row: 1; grid-column: 1; height: 58px; aspect-ratio: auto; }
+  .modal.tour .cards.tiles .item .pic { grid-row: 1; grid-column: 1; height: 78px; aspect-ratio: auto; }
   .modal.tour .cards.tiles .item .txt { grid-row: 2; }
-  .modal.tour .cards.tiles .item .txt b { font-size: 14px; line-height: 1.12; }
+  .modal.tour .cards.tiles .item .txt b { font-size: 15px; line-height: 1.15; }
   /* the price sits on the picture's top corner (a grid item, so z-index works without making it the tap area's box) */
-  .modal.tour .cards.tiles .item .buy { grid-row: 1; grid-column: 1; justify-self: end; align-self: start; z-index: 1; min-height: 22px; min-width: 0; font-size: 13px; padding: 0 7px; }
+  .modal.tour .cards.tiles .item .buy { grid-row: 1; grid-column: 1; justify-self: end; align-self: start; z-index: 1; min-height: 24px; min-width: 0; font-size: 14px; padding: 0 8px; }
   .modal .tournote { margin: 0 2px 6px; font-size: 15px; opacity: .75; }
   .modal .tourmore { font-size: 17px; }
-  .tourbar { position: sticky; bottom: 0; display: flex; gap: 6px; align-items: center; background: var(--card); padding: 8px 0 calc(8px + env(safe-area-inset-bottom)); margin-top: 6px; }
+  .tourbar { position: sticky; bottom: 0; z-index: 2; display: flex; gap: 6px; align-items: center; background: var(--card); padding: 8px 0 calc(8px + env(safe-area-inset-bottom)); margin-top: 6px; }
   .tourbar button { min-height: 44px; border: 0; border-radius: 999px; font: 700 15px system-ui, sans-serif; color: var(--ink); white-space: nowrap; }
   .tourbar .tsmall { background: #f1ece5; padding: 0 10px; font-size: 14px; white-space: normal; line-height: 1.1; } /* wraps only on a narrower phone */
   .tourbar .tnext { margin-left: auto; background: var(--ink); color: #fff; padding: 0 15px; font-size: 16px; font-weight: 800; }
@@ -231,7 +239,7 @@
 // (#k=…) or, when the game is reopened without the link, from the game's saved
 // state on this phone. Without the token the bundle can't be read, so the
 // webhook key and the claim-code hashes inside it stay private.
-const ITER = 100000, BIN = "site-6d2a0eb5.bin", MSG = {"en":{"title":"Scan the QR code at Tech Day to play","body":"Grand Tech Hotel opens from the QR code on the screen at the start of Tech Day."},"sv":{"title":"Skanna QR-koden på Tech Day för att spela","body":"Grand Tech Hotel öppnas från QR-koden på skärmen i början av Tech Day."},"no":{"title":"Skann QR-koden på Tech Day for å spille","body":"Grand Tech Hotel åpnes fra QR-koden på skjermen i starten av Tech Day."},"da":{"title":"Scan QR-koden på Tech Day for at spille","body":"Grand Tech Hotel åbnes fra QR-koden på skærmen i starten af Tech Day."}};
+const ITER = 100000, BIN = "site-7d39b467.bin", MSG = {"en":{"title":"Scan the QR code at Tech Day to play","body":"Grand Tech Hotel opens from the QR code on the screen at the start of Tech Day."},"sv":{"title":"Skanna QR-koden på Tech Day för att spela","body":"Grand Tech Hotel öppnas från QR-koden på skärmen i början av Tech Day."},"no":{"title":"Skann QR-koden på Tech Day for å spille","body":"Grand Tech Hotel åpnes fra QR-koden på skjermen i starten av Tech Day."},"da":{"title":"Scan QR-koden på Tech Day for at spille","body":"Grand Tech Hotel åbnes fra QR-koden på skærmen i starten af Tech Day."}};
 
 function savedState() {
   try { return JSON.parse(localStorage.getItem('techday-hotel-v1') || '{}'); } catch { return {}; }
